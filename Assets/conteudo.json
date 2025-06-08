@@ -1,0 +1,135 @@
+{
+  "home": {
+    "titulo": "Leitor de Mangás"
+  },
+
+  "links": [
+    {
+      "texto": "Instagram",
+      "link": "https://instagram.com/perfil",
+      "corFundo": "#e1306c",
+      "corTexto": "#fff",
+      "corTextoPressionado": "#181818"
+    },
+    {
+      "texto": "Discord",
+      "link": "https://discord.gg/convite",
+      "corFundo": "#5865f2",
+      "corTexto": "#fff",
+      "corTextoPressionado": "#181818"
+    },
+    {
+      "texto": "Suporte financeiro",
+      "link": "https://GoFundMe.com/projeto",
+      "corFundo": "#33d406",
+      "corTexto": "#fff",
+      "corTextoPressionado": "#181818"
+    }
+  ],
+  "termos": {
+    "titulo": "Termos e Condições",
+    "secoes": [
+      {
+        "titulo": "1. Uso do Site",
+        "texto": "Este site é destinado apenas para fins informativos e de entretenimento. Não é permitido copiar, distribuir ou modificar qualquer conteúdo sem autorização."
+      },
+      {
+        "titulo": "2. Direitos Autorais",
+        "texto": "Todo o conteúdo disponibilizado pertence aos seus respectivos autores. Caso algum material viole direitos autorais, entre em contato para remoção."
+      },
+      {
+        "titulo": "3. Responsabilidade",
+        "texto": "Não nos responsabilizamos por danos decorrentes do uso das informações presentes neste site."
+      },
+      {
+        "titulo": "4. Alterações",
+        "texto": "Os termos podem ser alterados a qualquer momento, sem aviso prévio."
+      }
+    ],
+    "contato": "<br>Em caso de dúvidas, utilize a página de <a href=\"/Contacto\" data-link=\"spa\">Contacto</a>."
+  },
+  "recrutamento": {
+    "descricao": "Olá, seja bem vindo. Se desejar ajudar o site, poderá contribuir entrando na equipa. Agradecemos a sua ajuda!",
+    "campos": [
+      {
+        "label": "Nome", 
+        "tipo": "text", 
+        "nome": "nome", 
+        "obrigatorio": true
+      },
+      {
+        "label": "Contacto (email ou telemóvel)", 
+        "tipo": "text", 
+        "nome": "contacto", 
+        "obrigatorio": true
+      },
+      {
+        "label": "Função pretendida", 
+        "tipo": "select", 
+        "nome": "funcao", 
+        "opcoes": ["Tradutor", "Revisor", "Editor"], 
+        "obrigatorio": true
+      },
+      {
+        "label": "Motivos", 
+        "tipo": "textarea", 
+        "nome": "motivos", 
+        "obrigatorio": true
+      },
+      {
+        "label": "Experiência (se aplicável)", 
+        "tipo": "textarea", 
+        "nome": "experiencia", 
+        "obrigatorio": false
+      }
+    ],
+    "requisitos": {
+      "Tradutor": [
+        "Português fluente e outra língua avançada"
+      ],
+      "Revisor": [
+        "Português fluente",
+        "Atenção aos detalhes"
+      ],
+      "Editor": [
+        "Conhecimentos de edição de imagem",
+        "Photoshop ou equivalente"
+      ]
+    }
+  },
+  "contacto": {
+    "campos": [
+      {
+        "label": "Nome", 
+        "tipo": "text", 
+        "nome": "nome", 
+        "obrigatorio": true
+      },
+      {
+        "label": "E-mail", 
+        "tipo": "email", 
+        "nome": "email", 
+        "obrigatorio": true
+      },
+      {
+        "label": "Mensagem", 
+        "tipo": "textarea", 
+        "nome": "mensagem", 
+        "obrigatorio": true
+      }
+    ]
+  },
+  "cap": {
+      "anterior": "Anterior",
+      "proximo": "Próximo",
+      "voltar": "Voltar ao Manga"
+  },
+  "404": {
+    "titulo": "Erro 404",
+    "mensagem": "Página não encontrada.",
+    "link": {
+      "texto": "Voltar para Home",
+      "pagina": "/"
+    }
+  }
+}

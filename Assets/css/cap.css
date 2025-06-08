@@ -1,0 +1,149 @@
+/* Use uma classe para o container principal *
+.container-cap {
+    max-width: 800px;
+    margin: 15px auto;
+    padding: 12px;
+    background: #2d2d2d;
+}
+*/
+/* Especifique img apenas dentro do container */
+.container-cap img,
+#paginas img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    border-radius: 0;
+    padding: 0;
+    /* Remove qualquer margem entre imagens */
+}
+
+/* Especifique h1/h2 apenas dentro do container */
+.container-cap h1,
+.container-cap h2 {
+    text-align: center;
+    color: #e0b347;
+    margin-top: 32px;
+}
+
+/* Restante igual, mas usando .container-cap para escopo */
+.container-cap .nav, .nav-btn.center{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 8px 0; 
+    gap: 10px;
+}
+.container-cap .nav a, .nav-btn.center {
+    margin: 0 1px;
+    text-decoration: none;
+}
+.container-cap .nav a:hover, .nav-btn.center:hover { 
+    text-decoration: none;
+}
+.container-cap .nav-btn {
+    flex: 1;
+    margin: 0 3px;
+    width: 100%;
+    box-sizing: border-box;
+    background: none;
+    border: 2px solid #e0b347;
+    color: #e0b347;
+    border-radius: 3px;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    min-width: 0;
+
+}
+.container-cap .nav-btn:disabled,
+.container-cap .nav-btn.disabled {
+    border-color: #888;
+    color: #888;
+    background: #232323;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+#paginas {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    padding-left: 12px;
+    padding-right: 12px;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+#paginas img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+    border-radius: 0;
+    padding: 0;
+    object-fit: contain;
+    box-sizing: border-box;
+}
+.container-cap .nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+#paginas img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+    border-radius: 0;
+    padding: 0;
+    object-fit: contain;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0 12px;
+    box-sizing: border-box;
+}
+.container-cap .nav-btn {
+    flex: 1 1 0;
+    min-width: 0;
+    margin: 0 3px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+  #paginas {
+    padding-left: 2vw;
+    padding-right: 2vw;
+  }
+  .container-cap .nav {
+    padding: 0 2vw;
+  }
+}
+@media (max-width: 400px) {
+  #paginas {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .container-cap .nav {
+    padding: 0;
+  }
+}
+@media (max-width: 300px) {
+  .container-cap .nav {
+    flex-direction: column;
+    gap: 6px;
+  }
+  .container-cap .nav-btn {
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+    display: block;
+  }
+}

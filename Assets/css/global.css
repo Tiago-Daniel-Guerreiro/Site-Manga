@@ -1,0 +1,173 @@
+/* =====================
+   Containers, Divs, Estrutura
+   ===================== */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #232323;
+    color: #eee;
+    font-family: Arial, sans-serif;
+}
+
+.container, .links-container, .manga-container, .container-cap, .home-container, .links-container, .recrutamento-container, .pesquisa-container, .termos-container {
+    max-width: 65%;
+    margin: 30px auto;
+    background: #2d2d2d;
+    border-radius: 8px;
+    padding: 28px 24px;
+    color: #eee;
+    box-shadow: 0 2px 12px #0005;
+    width: 60%;
+    min-height: 0;
+}
+
+#app {
+    flex: 1 0 auto;
+    min-height: 0;
+    padding-top: 56px;  /* espaço para header fixo */
+}
+
+/*     Header e Footer   */
+
+header.site-header {
+    margin-bottom: 12px;
+}
+.site-header, .site-footer {
+    min-height: 40px;
+    background: #181818 !important;
+    color: #ffd700 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none; 
+}
+
+.site-header {
+    position: fixed;
+    width: 100%;
+    height: 56px;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+.site-header.oculto {
+    display: none !important;
+}
+.site-header.header-oculto {
+    transform: translateY(-100%);
+}
+.site-header nav, .site-footer nav {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+.menu-table {
+    width: 100%;
+    height: 100%;
+    table-layout: fixed;
+}
+.menu-table td {
+    height: 56px;
+    vertical-align: middle;
+    text-align: center;
+    padding: 0 24px;
+}
+.site-footer .menu-table,
+.site-footer .menu-table td {
+    height: 40px !important;
+    max-height: 40px !important;
+}
+.site-footer a, .site-header a {
+    color: #ffd700;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1em;
+    padding: 6px 14px;
+    border-radius: 4px;
+    display: inline-block;
+    background: none;
+}
+.site-footer a:hover, .site-header a:hover {
+    background: #ffd700;
+    color: #181818;
+}
+
+/* =====================
+   Botões
+   ===================== */
+button, .nav-btn, .nav-btn.center, .container-cap .nav-btn, .container-cap .nav-btn.center {
+    background: #e0b347;
+    color: #232323;
+    border: 2px solid #e0b347;
+    border-radius: 6px;
+    padding: 10px 24px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    box-sizing: border-box;
+    display: inline-block;
+}
+button:hover, .nav-btn:hover, .nav-btn.center:hover, .container-cap .nav-btn:hover, .container-cap .nav-btn.center:hover {
+    background: #ffd700;
+    color: #232323;
+    border-color: #ffd700;
+    text-decoration: none;
+}
+button:disabled, .nav-btn:disabled, .nav-btn.center:disabled, .container-cap .nav-btn:disabled, .container-cap .nav-btn.center:disabled,
+button.disabled, .nav-btn.disabled, .nav-btn.center.disabled, .container-cap .nav-btn.disabled, .container-cap .nav-btn.center.disabled {
+    border-color: #888;
+    color: #888;
+    background: #232323;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* =====================
+   Outros
+   ===================== */
+.oculto {
+    display: none !important;
+}
+
+img, .capa {
+    image-rendering: auto;
+}
+
+@media (max-width: 800px) {
+  .container, .manga-container, .container-cap, .home-container, .links-container, .recrutamento-container, .pesquisa-container, .termos-container {
+    max-width: 100%;
+    padding: 16px 4px;
+    margin: 0;
+    border-radius: 0;
+    width: 100%;
+    border: 0;
+    box-shadow: 0;
+  }
+}
+@media (max-width: 850px) {
+  #paginas img, .container-cap img {
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+    height: auto;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: block;
+    border-radius: 0;
+    box-sizing: border-box;
+    object-fit: contain;
+  }
+}

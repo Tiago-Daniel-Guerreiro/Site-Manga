@@ -1,0 +1,51 @@
+/* =====================
+   Página 404 - Estilo
+   ===================== */
+.container {
+    max-width: 420px;
+    margin: 60px auto;
+    background: #232323;
+    border-radius: 8px;
+    padding: 32px 24px;
+    color: #eee;
+    text-align: center;
+    box-shadow: 0 2px 12px #0005;
+}
+h2 {
+    color: #e0b347;
+    margin-bottom: 18px;
+}
+.Message_404 {
+    margin-bottom: 24px;
+}
+.center-text {
+    text-align: center;
+}
+.nav-btn.center {
+    display: inline-block;
+    background: #e0b347;
+    color: #232323;
+    border: 2px solid #e0b347;
+    border-radius: 6px;
+    padding: 10px 24px;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+}
+.nav-btn.center:hover {
+    background: #ffd700;
+    color: #232323;
+    border-color: #ffd700;
+}
+/* Responsivo */
+@media (max-width: 600px) {
+  .container {
+    max-width: 98vw;
+    padding: 18px 4px;
+  }
+  .nav-btn.center {
+    width: 100%;
+    padding: 12px 0;
+  }
+}

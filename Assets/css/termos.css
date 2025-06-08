@@ -1,0 +1,19 @@
+.termos-title {
+    text-align: center;
+    color: #e0b347;
+    margin-bottom: 24px;
+}
+
+.termos-container h2 {
+    color: #ffd700;
+    margin-top: 28px;
+    margin-bottom: 10px;
+}
+
+.termos-container a {
+    color: #e0b347;
+    text-decoration: underline;
+}
+.termos-container a:hover {
+    color: #ffd700;
+}   

@@ -1,0 +1,62 @@
+body {
+    background: #232323;
+    color: #e0e0e0;
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+/*
+.container {
+    
+    max-width: 800px;
+    margin: 40px auto;
+    background: #2d2d2d;
+    border-radius: 8px;
+    padding: 32px;
+
+}
+
+.home-container {
+    max-width: 800px;
+    margin: 40px auto;
+    box-shadow: 0 2px 8px #0006;
+    padding: 32px;
+}
+*/
+.home-title {
+    text-align: center;
+    color: #e0b347;
+}
+
+.home-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 24px;
+    background: #232323;
+}
+.home-container th, .home-container td {
+    padding: 12px;
+    border-bottom: 1px solid #444;
+    text-align: center;
+}
+.home-container th {
+    background: #333;
+    color: #e0b347;
+}
+img.capa {
+    max-width: 200px;
+    max-height: 270px;
+    width: 160px;
+    height: 220px;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px #0008;
+    object-fit: cover;
+}
+a.nome-manga {
+    color: #e0b347;
+    font-size: 1.2em;
+    text-decoration: none;
+}
+a.nome-manga:hover {
+    color: #ffd580;
+    text-decoration: underline;
+}
