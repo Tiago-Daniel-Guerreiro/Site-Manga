@@ -1,0 +1,35 @@
+.links-title {
+    color: #e0b347;
+    margin-bottom: 32px;
+    text-align: center;
+}
+
+.links-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    align-items: center;
+}
+
+.link-btn {
+    display: block;
+    width: 100%;
+    min-width: 400px; 
+    margin: 0 auto;
+    padding: 16px 0;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: bold;
+    text-decoration: none;
+    color: #fff;
+    background: #444;
+    text-align: center;
+}
+
+
+.link-btn:hover {
+    filter: brightness(1.15);
+}

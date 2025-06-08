@@ -1,0 +1,27 @@
+RewriteEngine On
+RewriteBase /
+
+# Não reescreve para arquivos estáticos ou diretórios
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Se for .js e não existir, retorna 404
+RewriteCond %{REQUEST_URI} \.js$
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ - [R=404,L]
+
+# SPA fallback: tudo que não for arquivo/diretório real vai para index.html
+RewriteRule ^ index.html [L]
+
+Options -Indexes
+
+<FilesMatch "\.(html|js|css|json)$">
+    FileETag None
+    <IfModule mod_headers.c>
+        Header unset ETag
+        Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+        Header set Pragma "no-cache"
+        Header set Expires 0
+    </IfModule>
+</FilesMatch>

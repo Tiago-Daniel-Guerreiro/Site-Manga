@@ -1,0 +1,211 @@
+export function redirecionarPara404() 
+{
+    if (window.location.pathname === '/404')
+        return;
+
+    window.history.replaceState({}, '', '/404');
+    window.dispatchEvent(new PopStateEvent('popstate'));
+}
+
+export async function verificarManga_Utils(mangaId) 
+{
+    if (mangaId === null || mangaId === undefined || mangaId === '')
+        return false;
+
+    try 
+    {
+        const resposta = await fetch(`/Mangas/${mangaId}/Info.json`);
+
+        if (resposta.ok !== true)
+            return false;
+
+        const info = await resposta.json();
+
+        if (info !== null && info.Titulo !== null && info.Titulo !== undefined)
+            return true;
+
+        return false;
+    } 
+    catch 
+    {
+        return false;
+    }
+}
+
+export async function verificarCap_Utils(mangaId, capId) 
+{
+    if (mangaId === null || capId === null)
+        return false;
+
+    try 
+    {
+        const resp = await fetch(`/Mangas/${mangaId}/Caps.json`);
+
+        if (resp.ok !== true)
+            return false;
+
+        const contentType = resp.headers.get('content-type');
+
+        if (contentType === null || contentType === undefined)
+            return false;
+
+        if (contentType.includes('application/json') !== true)
+            return false;
+
+        const caps = await resp.json();
+
+        if (Array.isArray(caps) !== true)
+            return false;
+
+        for (let i = 0; i < caps.length; i++)
+        {
+            if (caps[i].nome === capId)
+                return true;
+        }
+
+        return false;
+    } 
+    catch
+    {
+        return false;
+    }
+}
+
+export async function ObterListaDeIdsValidos() 
+{
+    let ids = [];
+    let id = 0;
+    let consecutivosSemEncontrar = 0;
+
+    while (consecutivosSemEncontrar < 2) 
+    {
+        try 
+        {
+            const resp = await fetch(`/Mangas/${id}/Info.json`);
+
+            if (resp.ok !== true)
+            {
+                consecutivosSemEncontrar++;
+                id++;
+                continue;
+            }
+
+            const info = await resp.json();
+
+            if (info !== null && info.Titulo !== null && info.Titulo !== undefined && info.Titulo !== '')
+            {
+                ids.push(id);
+                consecutivosSemEncontrar = 0;
+            }
+            else
+                consecutivosSemEncontrar++;
+        } 
+        catch
+        {
+            consecutivosSemEncontrar++;
+        }
+        id++;
+    }
+    return ids;
+}
+
+export async function ObterTituloPeloId(id)
+{
+    if (id === null || id === undefined || id === '')
+        return null;
+
+    try 
+    {
+        const resp = await fetch(`/Mangas/${id}/Info.json`);
+
+        if (resp.ok !== true)
+            return null;
+
+        const info = await resp.json();
+
+        if (info === null)
+            return null;
+
+        if (info.Titulo === null || info.Titulo === undefined || info.Titulo === '')
+            return null;
+
+        return info.Titulo;
+    } 
+    catch 
+    {
+        return null;
+    }
+}
+
+export function ObterCapaPeloId(id) 
+{
+    return `/Mangas/${id}/Capa.webp`;
+}
+
+export async function ObterCapsPeloId(id) 
+{
+    try 
+    {
+        const resp = await fetch(`/Mangas/${id}/Caps.json`);
+
+        if (resp.ok !== true)
+            return [];
+
+        const json = await resp.json();
+
+        return json;
+    } 
+    catch
+    {
+        return [];
+    }
+}
+
+export async function ObterNomesCapsValidos(mangaId) 
+{
+    try 
+    {
+        const resp = await fetch(`/Mangas/${mangaId}/Caps.json`);
+
+        if (resp.ok !== true)
+            return [];
+
+        const caps = await resp.json();
+
+        if (Array.isArray(caps) !== true)
+            return [];
+
+        const nomes = [];
+
+        for (let i = 0; i < caps.length; i++) 
+        {
+            const nome = caps[i].nome;
+
+            if (nome !== null && nome !== undefined && nome !== '')
+                nomes.push(nome);
+        }
+
+        return nomes;
+    } 
+    catch 
+    {
+        return [];
+    }
+}
+
+export async function ObterInfoPeloId(id) 
+{
+    try 
+    {
+        const resp = await fetch(`/Mangas/${id}/Info.json`);
+
+        if (resp.ok !== true)
+            return null;
+
+        return await resp.json();
+    } 
+    catch 
+    {
+        return null;
+    }
+}
