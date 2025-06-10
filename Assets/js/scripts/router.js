@@ -1,8 +1,7 @@
-// Nova organização orientada a classes
 import { inserirHeaderFooter } from '/Assets/js/scripts/layout.js';
 import { verificarManga_Utils, verificarCap_Utils } from '/Assets/js/scripts/mangautils.js';
 
-const Link_Termina_ComBarra = true; // Define sSe o link termina com barra ou não
+const Link_Termina_ComBarra = false; // Define Se o link termina com barra ou não
 
 class PageLoader 
 {

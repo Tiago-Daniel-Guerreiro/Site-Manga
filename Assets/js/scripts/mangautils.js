@@ -59,7 +59,7 @@ export async function verificarCap_Utils(mangaId, capId)
 
         for (let i = 0; i < caps.length; i++)
         {
-            if (caps[i].nome === capId)
+            if (String(caps[i].nome) === String(capId))
                 return true;
         }
 

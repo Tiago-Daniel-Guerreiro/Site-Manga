@@ -1,11 +1,11 @@
-/* =====================
-   Containers, Divs, Estrutura
-   ===================== */
 html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
 }
+
 body {
     min-height: 100vh;
     display: flex;
@@ -13,6 +13,13 @@ body {
     background: #232323;
     color: #eee;
     font-family: Arial, sans-serif;
+}
+body::-webkit-scrollbar,
+html::-webkit-scrollbar,
+*::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    background: transparent !important;
 }
 
 .container, .links-container, .manga-container, .container-cap, .home-container, .links-container, .recrutamento-container, .pesquisa-container, .termos-container {
@@ -30,64 +37,75 @@ body {
 #app {
     flex: 1 0 auto;
     min-height: 0;
-    padding-top: 56px;  /* espaço para header fixo */
+    padding-top: 56px; 
 }
 
-/*     Header e Footer   */
 
-header.site-header {
-    margin-bottom: 12px;
-}
 .site-header, .site-footer {
     min-height: 40px;
     background: #181818 !important;
     color: #ffd700 !important;
-    display: flex;
+    display: flex; 
     align-items: center;
     justify-content: center;
     border: none; 
 }
 
 .site-header {
-    position: fixed;
+    position: static;
     width: 100%;
-    height: 56px;
+    height: 60px;
+    min-height: 60px;
     top: 0;
     left: 0;
     z-index: 100;
-    transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+    font-size: 1em;
+    padding: 0;
 }
 .site-header.oculto {
     display: none !important;
 }
-.site-header.header-oculto {
-    transform: translateY(-100%);
-}
+
 .site-header nav, .site-footer nav {
     width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    max-width: 600px;
+    max-width: 360px;
     margin: 0 auto;
+    padding: 0;
 }
 .menu-table {
     width: 100%;
     height: 100%;
-    table-layout: fixed;
+    margin: 0;
+    border-spacing: 0;
+    border-collapse: separate;
 }
 .menu-table td {
     height: 56px;
     vertical-align: middle;
     text-align: center;
-    padding: 0 24px;
+    padding: 0 48px;
+}
+.menu-table td a.nav-btn, .menu-table td a.nav-btn.center {
+    width: 100%;
+    height: 44px;
+    min-width: 100px;
+    max-width: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    white-space: nowrap;
 }
 .site-footer .menu-table,
 .site-footer .menu-table td {
-    height: 40px !important;
-    max-height: 40px !important;
+    height: 32px !important;
+    max-height: 32px !important;
 }
+
 .site-footer a, .site-header a {
     color: #ffd700;
     text-decoration: none;
@@ -103,31 +121,33 @@ header.site-header {
     color: #181818;
 }
 
-/* =====================
-   Botões
-   ===================== */
 button, .nav-btn, .nav-btn.center, .container-cap .nav-btn, .container-cap .nav-btn.center {
     background: #e0b347;
     color: #232323;
     border: 2px solid #e0b347;
     border-radius: 6px;
-    padding: 10px 24px;
-    font-size: 1em;
+    padding: 8px 16px;
+    font-size: 0.9em;
     font-weight: bold;
     cursor: pointer;
     text-align: center;
     text-decoration: none;
     box-sizing: border-box;
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 48px; 
+    min-width: 80px;
+    white-space: nowrap;
 }
-button:hover, .nav-btn:hover, .nav-btn.center:hover, .container-cap .nav-btn:hover, .container-cap .nav-btn.center:hover {
+button:hover, .nav-btn:hover, .nav-btn.center:hover {
     background: #ffd700;
     color: #232323;
     border-color: #ffd700;
     text-decoration: none;
 }
-button:disabled, .nav-btn:disabled, .nav-btn.center:disabled, .container-cap .nav-btn:disabled, .container-cap .nav-btn.center:disabled,
-button.disabled, .nav-btn.disabled, .nav-btn.center.disabled, .container-cap .nav-btn.disabled, .container-cap .nav-btn.center.disabled {
+button:disabled, .nav-btn:disabled, .nav-btn.center:disabled,
+button.disabled, .nav-btn.disabled, .nav-btn.center.disabled {
     border-color: #888;
     color: #888;
     background: #232323;
@@ -135,9 +155,6 @@ button.disabled, .nav-btn.disabled, .nav-btn.center.disabled, .container-cap .na
     pointer-events: none;
 }
 
-/* =====================
-   Outros
-   ===================== */
 .oculto {
     display: none !important;
 }
@@ -146,18 +163,79 @@ img, .capa {
     image-rendering: auto;
 }
 
+
+.site-header .menu-table td {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.site-header .menu-table td:not(:first-child) {
+    padding-left: 60px;
+}
+
+.site-header .menu-table td:not(:last-child) {
+    padding-right: 60px;
+}
+
+.site-header nav {
+    max-width: 520px;
+    width: 100%;
+    margin: 0 auto;
+    height: 100%;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.site-header .menu-table {
+    width: auto;
+    margin: 0 auto;
+    table-layout: auto;
+    border-spacing: 0 0;
+    border-collapse: separate;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.site-header .menu-table tr {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.site-header .menu-table td {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 12px;
+    width: auto;
+}
+
+.site-header .menu-table td a {
+    min-width: 100px;
+    height: 40px;
+    font-size: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    margin: 0;
+}
+
 @media (max-width: 800px) {
   .container, .manga-container, .container-cap, .home-container, .links-container, .recrutamento-container, .pesquisa-container, .termos-container {
-    max-width: 100%;
-    padding: 16px 4px;
+    max-width: 100vw;
+    width: 100vw;
+    box-sizing: border-box;
+    padding: 16px 5px;
     margin: 0;
     border-radius: 0;
-    width: 100%;
     border: 0;
     box-shadow: 0;
   }
-}
-@media (max-width: 850px) {
   #paginas img, .container-cap img {
     width: 100%;
     max-width: 100%;
@@ -169,5 +247,95 @@ img, .capa {
     border-radius: 0;
     box-sizing: border-box;
     object-fit: contain;
+  }
+  
+  #app {
+   /* flex: 0.8 0 auto; PROBLEMAS DO FOOTER EM TELEMOVEL */ 
+    flex: 1 0 auto;
+    min-height: 0;
+    padding-top: 56px;
+    padding-bottom: 0 !important;
+    top: 0 !important;
+    position: relative !important;
+  }
+  body, html {
+    width: 100vw !important;
+  }
+  .site-header, .site-footer {
+    min-height: 44px !important;
+    height: 44px !important;
+    font-size: 0.95em !important;
+    padding: 0 !important;
+  }
+  .site-header {
+    height: 44px !important;
+    min-height: 44px !important;
+    font-size: 0.95em !important;
+  }
+  .site-header .menu-table td {
+    padding: 0 16px !important;
+  }
+  .site-footer .menu-table,
+  .site-header .menu-table {
+    height: 100% !important;
+    min-height: 44px !important;
+    width: 100% !important;
+  }
+  .site-header .menu-table td, .site-footer .menu-table td {
+    padding: 0 1px !important;
+    height: 44px !important;
+    min-width: 24px;
+  }
+
+  .site-header a, .site-footer a {
+    font-size: 0.95em !important;
+    padding: 8px 2px !important;
+    border-radius: 4px;
+  }
+  .site-header .menu-table, .site-footer .menu-table {
+    border-collapse: separate;
+    border-spacing: 0 0;
+  }
+  
+/* O footer para de ficar abaixo da tela, mas ainda existe o espaço abaixo do footer 
+.site-footer { 
+    margin-bottom: 56px; 
+}
+*/
+
+  .site-header nav {
+    max-width: 100vw;
+    padding: 0;
+  }
+  .site-header .menu-table {
+    width: 100%;
+    display: table;
+    justify-content: unset;
+    align-items: unset;
+  }
+  .site-header .menu-table tr {
+    display: table-row;
+    width: auto;
+  }
+  .site-header .menu-table td {
+    display: table-cell;
+    padding: 0 4px !important;
+    width: auto;
+  }
+  .site-header .menu-table td a {
+    min-width: 60px;
+    font-size: 0.95em;
+    height: 32px;
+  }
+  .site-footer .menu-table,
+  .site-header .menu-table {
+    height: 100% !important;
+    min-height: 44px !important;
+    width: 100% !important;
+  }
+  .site-header .menu-table td, .site-footer .menu-table td {
+    padding: 0 1px !important;
+    height: 44px !important;
+    min-width: 24px;
   }
 }
