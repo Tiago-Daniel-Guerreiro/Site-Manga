@@ -210,7 +210,11 @@ class Router {
       return Router.navegar(pagina, []);
 
     // Se não há página, envia para home
-    if (!pagina || pagina === '' || pagina === BASE_PATH.replace(/\//g, ''))
+    if (!pagina || pagina === '' || pagina === BASE_PATH.replace(/\//g, '')) 
+      return Router.navegar('home', []);
+
+    // Se a URL for exatamente o BASE_PATH (ex: /site-manga/), também envia para home
+    if (window.location.pathname === BASE_PATH || window.location.pathname === BASE_PATH.slice(0, -1))
       return Router.navegar('home', []);
 
     return Router.navegar('404', []); // Se nada foi encontrado, envia para 404
