@@ -18,12 +18,10 @@ export function inserirHeaderFooter(pagina)
             return;
 
         const cabecalho = document.getElementById('main-header');
-
         if (cabecalho === null)
             return;
 
         const rodape = document.getElementById('footer');
-
         if (rodape === null)
             return;
 
@@ -31,8 +29,8 @@ export function inserirHeaderFooter(pagina)
         rodape.innerHTML =
             '<nav>' +
             '<table class="menu-table"><tr>' +
-            '<td><a href="/Termos" data-link="spa">Termos</a></td>' +
-            '<td><a href="/Contacto" data-link="spa">Contacto</a></td>' +
+            `<td><a href="${BASE_PATH}Termos" data-link="spa">Termos</a></td>` +
+            `<td><a href="${BASE_PATH}Contacto" data-link="spa">Contacto</a></td>` +
             '</tr></table>' +
             '</nav>';
 
@@ -40,10 +38,10 @@ export function inserirHeaderFooter(pagina)
         cabecalho.innerHTML =
             '<nav>' +
             '<table class="menu-table"><tr>' +
-            '<td><a href="/" data-link="spa">Home</a></td>' +
-            '<td><a href="/Pesquisa" data-link="spa">Pesquisa</a></td>' +
-            '<td><a href="/Recrutamento" data-link="spa">Recrutamento</a></td>' +
-            '<td><a href="/Links" data-link="spa">Links</a></td>' +
+            `<td><a href="${BASE_PATH}" data-link="spa">Home</a></td>` +
+            `<td><a href="${BASE_PATH}Pesquisa" data-link="spa">Pesquisa</a></td>` +
+            `<td><a href="${BASE_PATH}Recrutamento" data-link="spa">Recrutamento</a></td>` +
+            `<td><a href="${BASE_PATH}Links" data-link="spa">Links</a></td>` +
             '</tr></table>' +
             '</nav>';
     });
