@@ -52,10 +52,15 @@ class PageLoader
 
 class LinkVerifier
  {
-  // Formata o link para que cada segmento tenha a primeira letra maiúscula
+  // Formata o link para manter o BASE_PATH SEMPRE no início
   static formatarLink(path) 
   {
-    const partes = path.split('/').filter(parte => parte.length > 0);
+    // Remove o BASE_PATH do início, se já existir, para evitar duplicidade
+    let cleanPath = path;
+    if (cleanPath.startsWith(BASE_PATH)) {
+      cleanPath = cleanPath.slice(BASE_PATH.length - 1);
+    }
+    const partes = cleanPath.split('/').filter(parte => parte.length > 0);
     const resultado = [];
 
     for (let i = 0; i < partes.length; i++) 
@@ -68,7 +73,7 @@ class LinkVerifier
         resultado.push(parte.charAt(0).toUpperCase() + parte.slice(1).toLowerCase());
     }
 
-    let formatted = '/' + resultado.join('/');
+    let formatted = BASE_PATH + resultado.join('/');
 
     if(Link_Termina_ComBarra == true)
     {
