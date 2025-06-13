@@ -1,4 +1,5 @@
 import { ObterListaDeIdsValidos, ObterTituloPeloId, ObterCapaPeloId } from './scripts/mangautils.js';
+import { BASE_PATH } from './scripts/config.js';
 
 var html_erro = '<div>Erro ao carregar mangás.</div>';
 
@@ -15,7 +16,7 @@ async function CarregarHome()
     let tituloHome = 'Leitor de Mangás';
     try 
     {
-        const res = await fetch('Assets/conteudo.json');
+        const res = await fetch(BASE_PATH + 'Assets/conteudo.json');
         if (res.ok === true)
         {
             const data = await res.json();
@@ -87,7 +88,7 @@ async function CarregarHome()
         const manga = mangas[i];
         html += `<tr>
             <td><img src="${manga.capa}" alt="Capa" class="capa"></td>
-            <td><a href="/Manga/${manga.id}" class="nome-manga">${manga.titulo}</a></td>
+            <td><a href="${BASE_PATH}Manga/${manga.id}" class="nome-manga">${manga.titulo}</a></td>
         </tr>`;
     }
     html += '</tbody></table>';

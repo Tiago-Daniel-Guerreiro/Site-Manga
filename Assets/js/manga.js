@@ -1,4 +1,5 @@
 import { redirecionarPara404, ObterCapsPeloId, ObterInfoPeloId } from './scripts/mangautils.js';
+import { BASE_PATH } from './scripts/config.js';
 
 export async function init(mangaId) 
 {
@@ -56,7 +57,7 @@ export async function init(mangaId)
 
         mangaInfoDiv.innerHTML = `
             <div class="manga-header">
-                <img src="/Mangas/${mangaId}/Capa.webp" alt="Capa" class="capa">
+                <img src="${BASE_PATH}Mangas/${mangaId}/Capa.webp" alt="Capa" class="capa">
                 <div class="manga-details">
                     <h1>${info.Titulo}</h1>
                     <p><strong>Autor:</strong> ${info.Autor}</p>
@@ -105,7 +106,7 @@ export async function init(mangaId)
                     <tr>
                         <td>${cap.nome}</td>
                         <td>${data}</td>
-                        <td><a class="btn-cap" href="/Manga/${mangaId}/Cap/${cap.nome}" data-link="spa">Ler</a></td>
+                        <td><a class="btn-cap" href="${BASE_PATH}Manga/${mangaId}/Cap/${cap.nome}" data-link="spa">Ler</a></td>
                     </tr>
                 `;
             }

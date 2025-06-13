@@ -1,9 +1,11 @@
+import { BASE_PATH } from './config.js';
+
 export function redirecionarPara404() 
 {
-    if (window.location.pathname === '/404')
+    if (window.location.pathname === BASE_PATH + '404')
         return;
 
-    window.history.replaceState({}, '', '/404');
+    window.history.replaceState({}, '', BASE_PATH + '404');
     window.dispatchEvent(new PopStateEvent('popstate'));
 }
 
@@ -14,7 +16,7 @@ export async function verificarManga_Utils(mangaId)
 
     try 
     {
-        const resposta = await fetch(`/Mangas/${mangaId}/Info.json`);
+        const resposta = await fetch(BASE_PATH + `Mangas/${mangaId}/Info.json`);
 
         if (resposta.ok !== true)
             return false;
@@ -39,7 +41,7 @@ export async function verificarCap_Utils(mangaId, capId)
 
     try 
     {
-        const resp = await fetch(`/Mangas/${mangaId}/Caps.json`);
+        const resp = await fetch(BASE_PATH + `Mangas/${mangaId}/Caps.json`);
 
         if (resp.ok !== true)
             return false;
@@ -81,7 +83,7 @@ export async function ObterListaDeIdsValidos()
     {
         try 
         {
-            const resp = await fetch(`/Mangas/${id}/Info.json`);
+            const resp = await fetch(BASE_PATH + `Mangas/${id}/Info.json`);
 
             if (resp.ok !== true)
             {
@@ -116,7 +118,7 @@ export async function ObterTituloPeloId(id)
 
     try 
     {
-        const resp = await fetch(`/Mangas/${id}/Info.json`);
+        const resp = await fetch(BASE_PATH + `Mangas/${id}/Info.json`);
 
         if (resp.ok !== true)
             return null;
@@ -139,14 +141,14 @@ export async function ObterTituloPeloId(id)
 
 export function ObterCapaPeloId(id) 
 {
-    return `/Mangas/${id}/Capa.webp`;
+    return BASE_PATH + `Mangas/${id}/Capa.webp`;
 }
 
 export async function ObterCapsPeloId(id) 
 {
     try 
     {
-        const resp = await fetch(`/Mangas/${id}/Caps.json`);
+        const resp = await fetch(BASE_PATH + `Mangas/${id}/Caps.json`);
 
         if (resp.ok !== true)
             return [];
@@ -165,7 +167,7 @@ export async function ObterNomesCapsValidos(mangaId)
 {
     try 
     {
-        const resp = await fetch(`/Mangas/${mangaId}/Caps.json`);
+        const resp = await fetch(BASE_PATH + `Mangas/${mangaId}/Caps.json`);
 
         if (resp.ok !== true)
             return [];
@@ -197,7 +199,7 @@ export async function ObterInfoPeloId(id)
 {
     try 
     {
-        const resp = await fetch(`/Mangas/${id}/Info.json`);
+        const resp = await fetch(BASE_PATH + `Mangas/${id}/Info.json`);
 
         if (resp.ok !== true)
             return null;
