@@ -1,3 +1,5 @@
+import { BASE_PATH } from './scripts/config.js';
+
 function mostrarLinks() 
 {
     const conteudo = document.getElementById('conteudo');
@@ -7,7 +9,7 @@ function mostrarLinks()
 
     conteudo.innerHTML = '';
 
-    fetch('/Assets/conteudo.json')
+    fetch(BASE_PATH + 'Assets/conteudo.json')
         .then(function(resposta) 
         {
             return resposta.json();

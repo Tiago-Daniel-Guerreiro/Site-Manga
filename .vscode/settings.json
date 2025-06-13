@@ -1,0 +1,10 @@
+{
+  "liveServer.settings.rewriteRules": [
+    {
+      "source": "/(.*)",
+      "target": "/index.html"
+    }
+  ],
+  
+  "liveServer.settings.file": "/index.html"
+}
