@@ -57,30 +57,25 @@ class LinkVerifier
   {
     // Remove o BASE_PATH do início, se já existir, para evitar duplicidade
     let cleanPath = path;
-    if (cleanPath.startsWith(BASE_PATH))
-      cleanPath = cleanPath.slice(BASE_PATH.length - 1);
+    if (cleanPath.startsWith(BASE_PATH)) 
+      cleanPath = cleanPath.slice(BASE_PATH.length);
 
     const partes = cleanPath.split('/').filter(parte => parte.length > 0);
     const resultado = [];
-
     for (let i = 0; i < partes.length; i++) 
     {
       const parte = partes[i];
-
       if (Number(parte) == parte)
         resultado.push(parte);
       else
         resultado.push(parte.charAt(0).toUpperCase() + parte.slice(1).toLowerCase());
     }
-
     let formatted = BASE_PATH + resultado.join('/');
-
     if(Link_Termina_ComBarra == true)
     {
       if (!formatted.endsWith('/')) 
         formatted += '/';
     }
-
     return formatted;
   }
 
@@ -110,6 +105,16 @@ class LinkVerifier
     return await verificarCap_Utils(mangaId, capId);
   }
 
+  static extrairPagina(path) {
+    // Remove o BASE_PATH do início, se existir
+    let cleanPath = path;
+    if (cleanPath.startsWith(BASE_PATH)) {
+      cleanPath = cleanPath.slice(BASE_PATH.length);
+    }
+    const partes = cleanPath.split('/').filter(Boolean);
+    if (partes.length > 0) return partes[0].toLowerCase();
+    return 'home';
+  }
 }
 
 class Router {
@@ -176,14 +181,9 @@ class Router {
   static async router() 
   {
     inserirHeaderFooter();
-    let path = LinkVerifier.formatarLink(window.location.pathname);
-    const partes = path.split('/').filter(Boolean); // filter tira as partes vazias
-    let pagina = '';
-    if (partes.length > 0 && partes[0])
-      pagina = partes[0].toLowerCase();
-    else 
-      pagina = 'home';
-    
+    let path = window.location.pathname;
+    const pagina = LinkVerifier.extrairPagina(path);
+    const partes = path.split('/').filter(Boolean);
     const { mangaId, capId } = LinkVerifier.extrairMangaCap(path);
 
     // Se for arquivo estático, não navega SPA
@@ -194,35 +194,24 @@ class Router {
     if (mangaId) 
       {
       const mangaExiste = await verificarManga_Utils(mangaId);
-
       if (!mangaExiste) 
         return Router.navegar('404', []);
-
       if (capId) 
       {
         const capExiste = await verificarCap_Utils(mangaId, capId);
-
         if (!capExiste) 
           return Router.navegar('404', []);
-
         return Router.navegar('cap', [mangaId, capId]);
       }
       return Router.navegar('manga', [mangaId]);
     }
-
-    // Página JS existe?
     if (await Router.existeJsPagina(pagina))
       return Router.navegar(pagina, []);
-
-    // Se não há página, envia para home
     if (!pagina || pagina === '' || pagina === BASE_PATH.replace(/\//g, '')) 
       return Router.navegar('home', []);
-
-    // Se a URL for exatamente o BASE_PATH (ex: /site-manga/), também envia para home
     if (window.location.pathname === BASE_PATH || window.location.pathname === BASE_PATH.slice(0, -1))
       return Router.navegar('home', []);
-
-    return Router.navegar('404', []); // Se nada foi encontrado, envia para 404
+    return Router.navegar('404', []);
   }
 }
 
