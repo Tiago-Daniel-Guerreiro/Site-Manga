@@ -1,3 +1,5 @@
+import { BASE_PATH } from './config.js';
+
 // Garante que o DOM esteja pronto antes de executar a função
 function domReady(callback)
 {
