@@ -1,6 +1,6 @@
 // config.js
 // Centraliza o BASE_PATH para todos os scripts
-let BASE_PATH = undefined;
+let BASE_PATH = "site-manga";
 
 if (typeof BASE_PATH === 'undefined' || BASE_PATH === undefined) {
   function getBasePath() {
