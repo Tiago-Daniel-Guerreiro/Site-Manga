@@ -173,44 +173,53 @@ class Router {
     inserirHeaderFooter();
     let path = LinkVerifier.formatarLink(window.location.pathname);
     const partes = path.split('/').filter(Boolean); // filter tira as partes vazias
-    const pagina = (partes[0] || 'home').toLowerCase();
-    const { mangaId, capId } = LinkVerifier.extrairMangaCap(path); // pois retorna mangaId, capId
+    let pagina = '';
+    if (partes.length > 0 && partes[0])
+      pagina = partes[0].toLowerCase();
+    else 
+      pagina = 'home';
+    
+    const { mangaId, capId } = LinkVerifier.extrairMangaCap(path);
 
     // Se for arquivo estático, não navega SPA
     if (window.location.pathname.includes('.'))
       return;
 
     // Mangá e capítulo
-    if (mangaId !== null && mangaId !== '' && mangaId !== undefined && mangaId !== 'undefined')
-   {
+    if (mangaId) 
+      {
       const mangaExiste = await verificarManga_Utils(mangaId);
 
-      if (mangaExiste === false) 
+      if (!mangaExiste) 
         return Router.navegar('404', []);
 
-      if (capId !== null && capId !== '' && capId !== undefined && capId !== 'undefined') 
+      if (capId) 
       {
         const capExiste = await verificarCap_Utils(mangaId, capId);
 
-        if (capExiste === false)
+        if (!capExiste) 
           return Router.navegar('404', []);
 
         return Router.navegar('cap', [mangaId, capId]);
       }
-
       return Router.navegar('manga', [mangaId]);
     }
 
     // Página JS existe?
-    if (await Router.existeJsPagina(pagina) === true)
+    if (await Router.existeJsPagina(pagina))
       return Router.navegar(pagina, []);
+
+    // Se não há página, envia para home
+    if (!pagina || pagina === '' || pagina === BASE_PATH.replace(/\//g, ''))
+      return Router.navegar('home', []);
 
     return Router.navegar('404', []); // Se nada foi encontrado, envia para 404
   }
 }
 
 // Garante que a div conteudo existe SEMPRE no app
-function garantirConteudoDiv() {
+function garantirConteudoDiv() 
+{
   let conteudo = document.getElementById('conteudo');
 
   if (conteudo === null)
