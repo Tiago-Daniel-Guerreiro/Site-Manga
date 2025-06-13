@@ -1,3 +1,5 @@
+import { BASE_PATH } from './scripts/config.js';
+
 function mostrarContacto() 
 {
     const conteudo = document.getElementById('conteudo');
@@ -13,7 +15,7 @@ function mostrarContacto()
         '<p>Erro ao carregar o formulário de contacto.</p>' +
         '</div>';
 
-    fetch('/Assets/conteudo.json')
+    fetch(BASE_PATH + 'Assets/conteudo.json')
         .then(function(res) 
         {
             if (res.ok === true)

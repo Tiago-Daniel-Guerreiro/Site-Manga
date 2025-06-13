@@ -1,5 +1,10 @@
-import { inserirHeaderFooter } from '/Assets/js/scripts/layout.js';
-import { verificarManga_Utils, verificarCap_Utils } from '/Assets/js/scripts/mangautils.js';
+import { BASE_PATH } from './config.js';
+
+// Caminho base do projeto para subdiretórios
+// BASE_PATH é importado de './config.js'
+
+import { inserirHeaderFooter, mostrarFooter, mostrarHeader } from './layout.js';
+import { verificarManga_Utils, verificarCap_Utils } from './mangautils.js';
 
 const Link_Termina_ComBarra = false; // Define Se o link termina com barra ou não
 
@@ -12,7 +17,7 @@ class PageLoader
       const link = document.createElement('link');
       link.id = `css-${pagina}`;
       link.rel = 'stylesheet';
-      link.href = `/Assets/css/${pagina}.css`;
+      link.href = BASE_PATH + `Assets/css/${pagina}.css`;
       link.onload = res;
       document.head.appendChild(link);
     });
@@ -20,12 +25,12 @@ class PageLoader
 
   static carregarJs(pagina, params) 
   {
-    fetch(`/Assets/js/${pagina.toLowerCase()}.js`, { method: 'HEAD' })
+    fetch(BASE_PATH + `Assets/js/${pagina.toLowerCase()}.js`, { method: 'HEAD' })
       .then(resp => 
       {
         if (resp.ok) 
         {
-          import(`/Assets/js/${pagina.toLowerCase()}.js`).then(mod => 
+          import(BASE_PATH + `Assets/js/${pagina.toLowerCase()}.js`).then(mod => 
           {
             requestAnimationFrame(() => { // Obriga o carregamento ser chamado após .init
               if (typeof mod.init === 'function') 
@@ -107,7 +112,7 @@ class Router {
   {
     try 
     {
-      const resp = await fetch(`/Assets/js/${pagina}.js`, { method: 'HEAD' });
+      const resp = await fetch(BASE_PATH + `Assets/js/${pagina}.js`, { method: 'HEAD' });
       return resp.ok;
     } 
     catch 
@@ -120,13 +125,22 @@ class Router {
   {
     const formattedPath = LinkVerifier.formatarLink(path);
     // Só atualiza a URL se ela for diferente da atual, evitando recarregamento desnecessário
-    if (window.location.pathname !== formattedPath) {
+    if (window.location.pathname !== formattedPath)
         window.history.pushState({}, '', formattedPath);
-    }
+
   }
 
   static async navegar(pagina, params = []) 
   {
+    if( pagina == null || pagina == undefined || pagina == '404' ||params == null || params == undefined || !Array.isArray(params))
+    {
+      pagina = '404';
+      params = [];
+      mostrarHeader(false);
+      mostrarFooter(false);
+    }
+
+
     let path;
     if (pagina.toLowerCase() === 'cap' && params.length === 2) 
       path = `/Manga/${params[0]}/Cap/${params[1]}`;
@@ -140,23 +154,23 @@ class Router {
       if (Array.isArray(params) && params.length > 0)
           path += '/' + params.join('/');
     }
-
+    
     Router.atualizarUrlFormatada(path);
-    const conteudo = garantirConteudoDiv();
-    conteudo.style.display = '';
-    conteudo.innerHTML = '';
-    document.getElementById('app').style.visibility = 'hidden';
     await PageLoader.carregarCss(pagina);
-    inserirHeaderFooter(pagina);
-    document.getElementById('app').style.visibility = 'visible';
 
     // Só importa o JS se realmente existir
     if (await Router.existeJsPagina(pagina) === true)
-      PageLoader.carregarJs(pagina, params.length > 0 ? params : []);
+    {
+      if(params.length > 0 || params == [])
+        PageLoader.carregarJs(pagina, params);
+      else
+        PageLoader.carregarJs(pagina);
+    }
 }
 
   static async router() 
   {
+    inserirHeaderFooter();
     let path = LinkVerifier.formatarLink(window.location.pathname);
     const partes = path.split('/').filter(Boolean); // filter tira as partes vazias
     const pagina = (partes[0] || 'home').toLowerCase();
@@ -216,4 +230,4 @@ document.addEventListener('DOMContentLoaded', () => {
 window.addEventListener('popstate', Router.router);
 window.addEventListener('DOMContentLoaded', Router.router);
 
-const res = await fetch('/Assets/conteudo.json');
+const res = await fetch(BASE_PATH + 'Assets/conteudo.json');

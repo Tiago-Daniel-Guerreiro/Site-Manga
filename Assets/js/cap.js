@@ -1,4 +1,5 @@
 import { redirecionarPara404, verificarManga_Utils, verificarCap_Utils } from './scripts/mangautils.js';
+import { BASE_PATH } from './scripts/config.js';
 
 export function init(mangaId, capId) 
 {
@@ -24,7 +25,7 @@ export function init(mangaId, capId)
     {
         try 
         {
-            const res = await fetch('/Assets/conteudo.json');
+            const res = await fetch(BASE_PATH + 'Assets/conteudo.json');
             const data = await res.json();
 
             if (data.cap === undefined || data.cap === null)

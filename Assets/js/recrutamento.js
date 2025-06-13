@@ -1,3 +1,5 @@
+import { BASE_PATH } from './scripts/config.js';
+
 function main() 
 {
     const conteudo = document.getElementById('conteudo');
@@ -14,7 +16,7 @@ function main()
 
     conteudo.innerHTML = '';
 
-    fetch('/Assets/conteudo.json')
+    fetch(BASE_PATH + 'Assets/conteudo.json')
         .then(function(res) 
         {
             return res.json();
