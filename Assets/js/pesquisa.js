@@ -1,4 +1,5 @@
 import { ObterListaDeIdsValidos, ObterTituloPeloId, ObterCapaPeloId } from './scripts/mangautils.js';
+import { BASE_PATH } from './scripts/config.js';
 
 function renderPesquisa() 
 {
@@ -92,7 +93,7 @@ function renderPesquisa()
             const manga = encontrados[i];
             html += `<div style="display:flex;align-items:center;margin-bottom:8px;">
                 <img src="${ObterCapaPeloId(manga.id)}" alt="Capa">
-                <a href="/Manga/${manga.id}"><strong>${manga.titulo}</strong></a>
+                <a href="${BASE_PATH}Manga/${manga.id}"><strong>${manga.titulo}</strong></a>
             </div>`;
         }
         resultado.innerHTML = html;

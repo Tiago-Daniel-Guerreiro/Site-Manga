@@ -47,7 +47,7 @@ export function init(mangaId, capId)
     {
         try 
         {
-            const resposta = await fetch(`/Mangas/${mangaId}/Info.json`);
+            const resposta = await fetch(BASE_PATH + `Mangas/${mangaId}/Info.json`);
             infoManga = await resposta.json();
             const tituloEl = document.getElementById('titulo');
 
@@ -82,12 +82,12 @@ export function init(mangaId, capId)
         let btnProximo = '<a class="nav-btn disabled" tabindex="-1">' + textos.proximo + '</a>';
 
         if (existeAnterior === true)
-            btnAnterior = '<a class="nav-btn" href="/Manga/' + mangaId + '/Cap/' + (parseInt(capId, 10) - 1) + '" data-link="spa">' + textos.anterior + '</a>';
+            btnAnterior = `<a class="nav-btn" href="${BASE_PATH}Manga/${mangaId}/Cap/${parseInt(capId, 10) - 1}" data-link="spa">${textos.anterior}</a>`;
 
         if (existeProximo === true)
-            btnProximo = '<a class="nav-btn" href="/Manga/' + mangaId + '/Cap/' + (parseInt(capId, 10) + 1) + '" data-link="spa">' + textos.proximo + '</a>';
+            btnProximo = `<a class="nav-btn" href="${BASE_PATH}Manga/${mangaId}/Cap/${parseInt(capId, 10) + 1}" data-link="spa">${textos.proximo}</a>`;
 
-        const btnManga = '<a class="nav-btn center" href="/manga/' + mangaId + '" data-link="spa">' + textos.voltar + '</a>';
+        const btnManga = `<a class="nav-btn center" href="${BASE_PATH}Manga/${mangaId}" data-link="spa">${textos.voltar}</a>`;
         nav.innerHTML = btnAnterior + btnManga + btnProximo;
     }
 
@@ -122,7 +122,7 @@ export function init(mangaId, capId)
         PrimeiraImagemIgualAZero = true;
         let indice = 0;
 
-        const primeiraExiste = await verificaImagem('/Mangas/' + mangaId + '/Cap/' + capId + '/0.webp');
+        const primeiraExiste = await verificaImagem(BASE_PATH + `Mangas/${mangaId}/Cap/${capId}/0.webp`);
 
         if (primeiraExiste !== true)
         {
@@ -132,7 +132,7 @@ export function init(mangaId, capId)
 
         while (true)
         {
-            const urlImg = '/Mangas/' + mangaId + '/Cap/' + capId + '/' + indice + '.webp';
+            const urlImg = BASE_PATH + `Mangas/${mangaId}/Cap/${capId}/` + indice + `.webp`;
             const existe = await verificaImagem(urlImg);
             
             if (existe !== true)
