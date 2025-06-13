@@ -57,9 +57,9 @@ class LinkVerifier
   {
     // Remove o BASE_PATH do início, se já existir, para evitar duplicidade
     let cleanPath = path;
-    if (cleanPath.startsWith(BASE_PATH)) {
+    if (cleanPath.startsWith(BASE_PATH))
       cleanPath = cleanPath.slice(BASE_PATH.length - 1);
-    }
+
     const partes = cleanPath.split('/').filter(parte => parte.length > 0);
     const resultado = [];
 
