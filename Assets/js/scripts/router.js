@@ -82,7 +82,6 @@ class LinkVerifier
 
   static extrairMangaCap(path) 
   {
-    console.log('[router] extrairMangaCap path:', path);
     // Remove o BASE_PATH do início, se existir
     let cleanPath = path;
     if (cleanPath.startsWith(BASE_PATH)) {
@@ -97,7 +96,6 @@ class LinkVerifier
       if (partes[2] === 'cap' && partes[3]) 
         capId = partes[3];
     }
-    console.log('[router] extrairMangaCap resultado:', { mangaId, capId });
     return { mangaId, capId };
   }
 
@@ -148,7 +146,6 @@ class Router {
 
   static async navegar(pagina, params = []) 
   {
-    console.log('[router] navegar para:', pagina, 'params:', params);
     if( pagina == null || pagina == undefined || pagina == '404' ||params == null || params == undefined || !Array.isArray(params))
     {
       pagina = '404';
@@ -193,12 +190,9 @@ class Router {
   {
     inserirHeaderFooter();
     let path = window.location.pathname;
-    console.log('[router] router path:', path);
     const pagina = LinkVerifier.extrairPagina(path);
-    console.log('[router] router pagina extraída:', pagina);
     const partes = path.split('/').filter(Boolean);
     const { mangaId, capId } = LinkVerifier.extrairMangaCap(path);
-    console.log('[router] router mangaId:', mangaId, 'capId:', capId);
 
     // Se for arquivo estático, não navega SPA
     if (window.location.pathname.includes('.'))
