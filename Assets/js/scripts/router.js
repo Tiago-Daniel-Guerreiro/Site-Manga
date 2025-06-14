@@ -41,9 +41,8 @@ class PageLoader
                   mod.init();
               }
             });
-          }).catch(err => 
-          {
-            console.error(`[carregarJs] Erro ao carregar o módulo JS para ${pagina}:`, err);
+          }).catch(() => {
+            Router.navegar('404', []);
           });
         } 
       });
