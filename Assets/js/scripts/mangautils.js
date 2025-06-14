@@ -16,7 +16,8 @@ export async function verificarManga_Utils(mangaId)
 
     try 
     {
-        const resposta = await fetch(BASE_PATH + `Mangas/${mangaId}/Info.json`);
+        const url = BASE_PATH + `Mangas/${mangaId}/Info.json`;
+        const resposta = await fetch(url);
 
         if (resposta.ok !== true)
             return false;
@@ -28,7 +29,7 @@ export async function verificarManga_Utils(mangaId)
 
         return false;
     } 
-    catch 
+    catch (e)
     {
         return false;
     }
@@ -41,7 +42,8 @@ export async function verificarCap_Utils(mangaId, capId)
 
     try 
     {
-        const resp = await fetch(BASE_PATH + `Mangas/${mangaId}/Caps.json`);
+        const url = BASE_PATH + `Mangas/${mangaId}/Caps.json`;
+        const resp = await fetch(url);
 
         if (resp.ok !== true)
             return false;
@@ -64,10 +66,9 @@ export async function verificarCap_Utils(mangaId, capId)
             if (String(caps[i].nome) === String(capId))
                 return true;
         }
-
         return false;
     } 
-    catch
+    catch(e)
     {
         return false;
     }
@@ -83,7 +84,8 @@ export async function ObterListaDeIdsValidos()
     {
         try 
         {
-            const resp = await fetch(BASE_PATH + `Mangas/${id}/Info.json`);
+            const url = BASE_PATH + `Mangas/${id}/Info.json`;
+            const resp = await fetch(url);
 
             if (resp.ok !== true)
             {
@@ -102,10 +104,11 @@ export async function ObterListaDeIdsValidos()
             else
                 consecutivosSemEncontrar++;
         } 
-        catch
+        catch(e)
         {
             consecutivosSemEncontrar++;
         }
+
         id++;
     }
     return ids;
@@ -118,7 +121,8 @@ export async function ObterTituloPeloId(id)
 
     try 
     {
-        const resp = await fetch(BASE_PATH + `Mangas/${id}/Info.json`);
+        const url = BASE_PATH + `Mangas/${id}/Info.json`;
+        const resp = await fetch(url);
 
         if (resp.ok !== true)
             return null;
@@ -133,7 +137,7 @@ export async function ObterTituloPeloId(id)
 
         return info.Titulo;
     } 
-    catch 
+    catch (e)
     {
         return null;
     }
@@ -148,16 +152,16 @@ export async function ObterCapsPeloId(id)
 {
     try 
     {
-        const resp = await fetch(BASE_PATH + `Mangas/${id}/Caps.json`);
+        const url = BASE_PATH + `Mangas/${id}/Caps.json`;
+        const resp = await fetch(url);
 
         if (resp.ok !== true)
             return [];
 
         const json = await resp.json();
-
         return json;
     } 
-    catch
+    catch(e)
     {
         return [];
     }
@@ -167,7 +171,8 @@ export async function ObterNomesCapsValidos(mangaId)
 {
     try 
     {
-        const resp = await fetch(BASE_PATH + `Mangas/${mangaId}/Caps.json`);
+        const url = BASE_PATH + `Mangas/${mangaId}/Caps.json`;
+        const resp = await fetch(url);
 
         if (resp.ok !== true)
             return [];
@@ -182,14 +187,13 @@ export async function ObterNomesCapsValidos(mangaId)
         for (let i = 0; i < caps.length; i++) 
         {
             const nome = caps[i].nome;
-
             if (nome !== null && nome !== undefined && nome !== '')
                 nomes.push(nome);
         }
 
         return nomes;
     } 
-    catch 
+    catch (e)
     {
         return [];
     }
@@ -199,14 +203,16 @@ export async function ObterInfoPeloId(id)
 {
     try 
     {
-        const resp = await fetch(BASE_PATH + `Mangas/${id}/Info.json`);
+        const url = BASE_PATH + `Mangas/${id}/Info.json`;
+        const resp = await fetch(url);
 
         if (resp.ok !== true)
             return null;
-
-        return await resp.json();
+        
+        const info = await resp.json();
+        return info;
     } 
-    catch 
+    catch (e)
     {
         return null;
     }
