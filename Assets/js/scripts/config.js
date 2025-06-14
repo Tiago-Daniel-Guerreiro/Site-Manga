@@ -1,6 +1,6 @@
 // config.js
 // Centraliza o BASE_PATH para todos os scripts
-const Subdiretorio = false; // Define se o site está em um subdiretório
+const Subdiretorio = true; // Define se o site está em um subdiretório
 const SubdiretorioNome = "Site-Manga"; // ou qualquer outro nome
 
 function getBasePath() 
