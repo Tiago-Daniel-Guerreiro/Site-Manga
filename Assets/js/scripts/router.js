@@ -15,9 +15,9 @@ class PageLoader
     document.querySelectorAll('link[id^="css-"]').forEach(link => link.remove());
     await new Promise(res => {
       const link = document.createElement('link');
-      link.id = `css-${pagina}`;
+      link.id = `css-${pagina.toLowerCase()}`;
       link.rel = 'stylesheet';
-      link.href = BASE_PATH + `Assets/css/${pagina}.css`;
+      link.href = BASE_PATH + `Assets/css/${pagina.toLowerCase()}.css`;
       link.onload = res;
       document.head.appendChild(link);
     });
@@ -150,7 +150,6 @@ class Router {
       mostrarFooter(false);
     }
 
-
     let path;
     if (pagina.toLowerCase() === 'cap' && params.length === 2) 
       path = `/Manga/${params[0]}/Cap/${params[1]}`;
@@ -159,7 +158,6 @@ class Router {
     else 
     {
       pagina = pagina.toLowerCase();
-
       path = '/' + pagina;
       if (Array.isArray(params) && params.length > 0)
           path += '/' + params.join('/');
@@ -167,6 +165,12 @@ class Router {
     
     Router.atualizarUrlFormatada(path);
     await PageLoader.carregarCss(pagina);
+
+    // Sempre carrega o JS da página 404 ao navegar para ela
+    if (pagina === '404') {
+      PageLoader.carregarJs('404', []);
+      return;
+    }
 
     // Só importa o JS se realmente existir
     if (await Router.existeJsPagina(pagina) === true)
