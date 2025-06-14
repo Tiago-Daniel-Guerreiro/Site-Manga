@@ -19,7 +19,7 @@ export function inserirHeaderFooter(pagina)
         if (pagina === "404")
             return;
 
-        const cabecalho = document.getElementById('main-header');
+        const cabecalho = document.getElementById('header');
         if (cabecalho === null)
             return;
 
@@ -31,8 +31,8 @@ export function inserirHeaderFooter(pagina)
         rodape.innerHTML =
             '<nav>' +
             '<table class="menu-table"><tr>' +
-            `<td><a href="${BASE_PATH}Termos" data-link="spa">Termos</a></td>` +
-            `<td><a href="${BASE_PATH}Contacto" data-link="spa">Contacto</a></td>` +
+            `<td><a href="${BASE_PATH}termos" data-link="spa">Termos</a></td>` +
+            `<td><a href="${BASE_PATH}contacto" data-link="spa">Contacto</a></td>` +
             '</tr></table>' +
             '</nav>';
 
@@ -41,9 +41,9 @@ export function inserirHeaderFooter(pagina)
             '<nav>' +
             '<table class="menu-table"><tr>' +
             `<td><a href="${BASE_PATH}" data-link="spa">Home</a></td>` +
-            `<td><a href="${BASE_PATH}Pesquisa" data-link="spa">Pesquisa</a></td>` +
-            `<td><a href="${BASE_PATH}Recrutamento" data-link="spa">Recrutamento</a></td>` +
-            `<td><a href="${BASE_PATH}Links" data-link="spa">Links</a></td>` +
+            `<td><a href="${BASE_PATH}pesquisa" data-link="spa">Pesquisa</a></td>` +
+            `<td><a href="${BASE_PATH}recrutamento" data-link="spa">Recrutamento</a></td>` +
+            `<td><a href="${BASE_PATH}links" data-link="spa">Links</a></td>` +
             '</tr></table>' +
             '</nav>';
     });
@@ -51,7 +51,7 @@ export function inserirHeaderFooter(pagina)
 
 export function mostrarHeader(ativo)
 {
-    const cabecalho = document.getElementById('main-header');
+    const cabecalho = document.getElementById('header');
 
     if (cabecalho === null)
         return;

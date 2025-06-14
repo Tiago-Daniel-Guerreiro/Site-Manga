@@ -1,20 +1,30 @@
 // config.js
 // Centraliza o BASE_PATH para todos os scripts
-let BASE_PATH = undefined;
+const Subdiretorio = true; // Define se o site está em um subdiretório
+const SubdiretorioNome = "Site-Manga"; // ou qualquer outro nome
 
-if (typeof BASE_PATH === 'undefined' || BASE_PATH === undefined) 
+function getBasePath() 
 {
-  function getBasePath() 
+  if(Subdiretorio === true) 
   {
-    const path = window.location.pathname;
-    // Procura por /site-manga/ em qualquer parte do path
-    let match = path.match(/(\/site-manga\/)/i);
-    if (match) 
-        return match[1];
-    // Se não encontrar, retorna '/'
-    return '/';
-  }
-  BASE_PATH = getBasePath();
+    // Procura '/Site-Manga/' em qualquer parte do path
+    const regex = new RegExp(`(\\/.*${SubdiretorioNome}\\/)+`, 'i');
+    const match = window.location.pathname.match(regex);
+    if (match !== undefined && match !== null && match[0]) 
+    {
+      // Garante que termina com '/'
+      let base = match[0];
+      if (!base.endsWith('/')) 
+        base += '/';
+
+      return base;
+    }
+  }  
+
+  // Caso contrário, usa root
+  return '/';
 }
 
-export { BASE_PATH };
+const BASE_PATH = getBasePath();
+
+export { BASE_PATH, Subdiretorio };

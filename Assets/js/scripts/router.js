@@ -59,7 +59,8 @@ class LinkVerifier
     let cleanPath = path;
     if (cleanPath.startsWith(BASE_PATH)) 
       cleanPath = cleanPath.slice(BASE_PATH.length);
-
+    // Remove qualquer Assets/js/scripts/router.js ou Assets/css/global.css do final
+    cleanPath = cleanPath.replace(/Assets\/(js|css)\/.*/i, '');
     const partes = cleanPath.split('/').filter(parte => parte.length > 0);
     const resultado = [];
     for (let i = 0; i < partes.length; i++) 
@@ -81,17 +82,22 @@ class LinkVerifier
 
   static extrairMangaCap(path) 
   {
-    const partes = path.toLowerCase().split('/').filter(Boolean);
+    console.log('[router] extrairMangaCap path:', path);
+    // Remove o BASE_PATH do início, se existir
+    let cleanPath = path;
+    if (cleanPath.startsWith(BASE_PATH)) {
+      cleanPath = cleanPath.slice(BASE_PATH.length);
+    }
+    const partes = cleanPath.toLowerCase().split('/').filter(Boolean);
     let mangaId = null, capId = null;
 
     if (partes[0] === 'manga' && partes[1]) 
-  {
+    {
       mangaId = partes[1];
-
       if (partes[2] === 'cap' && partes[3]) 
         capId = partes[3];
-
     }
+    console.log('[router] extrairMangaCap resultado:', { mangaId, capId });
     return { mangaId, capId };
   }
 
@@ -142,6 +148,7 @@ class Router {
 
   static async navegar(pagina, params = []) 
   {
+    console.log('[router] navegar para:', pagina, 'params:', params);
     if( pagina == null || pagina == undefined || pagina == '404' ||params == null || params == undefined || !Array.isArray(params))
     {
       pagina = '404';
@@ -186,9 +193,12 @@ class Router {
   {
     inserirHeaderFooter();
     let path = window.location.pathname;
+    console.log('[router] router path:', path);
     const pagina = LinkVerifier.extrairPagina(path);
+    console.log('[router] router pagina extraída:', pagina);
     const partes = path.split('/').filter(Boolean);
     const { mangaId, capId } = LinkVerifier.extrairMangaCap(path);
+    console.log('[router] router mangaId:', mangaId, 'capId:', capId);
 
     // Se for arquivo estático, não navega SPA
     if (window.location.pathname.includes('.'))
@@ -209,12 +219,11 @@ class Router {
       }
       return Router.navegar('manga', [mangaId]);
     }
+    // Corrigir: qualquer rota vazia, '/', '/Site-Manga/' ou equivalente navega para home
+    if (!pagina || pagina === '' || pagina === BASE_PATH.replace(/\//g, '') || window.location.pathname === '/' || window.location.pathname === BASE_PATH || window.location.pathname === BASE_PATH.slice(0, -1))
+      return Router.navegar('home', []);
     if (await Router.existeJsPagina(pagina))
       return Router.navegar(pagina, []);
-    if (!pagina || pagina === '' || pagina === BASE_PATH.replace(/\//g, '')) 
-      return Router.navegar('home', []);
-    if (window.location.pathname === BASE_PATH || window.location.pathname === BASE_PATH.slice(0, -1))
-      return Router.navegar('home', []);
     return Router.navegar('404', []);
   }
 }
