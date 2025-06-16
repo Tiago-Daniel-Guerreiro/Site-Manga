@@ -217,3 +217,55 @@ export async function ObterInfoPeloId(id)
         return null;
     }
 }
+
+export async function obterCapAnteriorProximo(mangaId, capId, proximo)
+{
+    try 
+    {
+        const url = BASE_PATH + 'Mangas/' + mangaId + '/Caps.json';
+        const resp = await fetch(url);
+
+        if (resp.ok !== true)
+            return null;
+
+        const caps = await resp.json();
+
+        if (Array.isArray(caps) !== true)
+            return null;
+
+        let idx = -1;
+        let i = 0;
+
+        while (i < caps.length)
+        {
+            if (String(caps[i].nome) === String(capId))
+            {
+                idx = i;
+                break;
+            }
+            i = i + 1;
+        }
+
+        if (idx === -1)
+            return null;
+
+        if (proximo === true)
+        {
+            if (idx < caps.length - 1)
+                return caps[idx + 1].nome;
+
+            return null;
+        }
+        else
+        {
+            if (idx > 0)
+                return caps[idx - 1].nome;
+
+            return null;
+        }
+    }
+    catch (e)
+    {
+        return null;
+    }
+}

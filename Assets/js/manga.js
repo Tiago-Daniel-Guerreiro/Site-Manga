@@ -102,9 +102,13 @@ export async function init(mangaId)
                 if (cap.data !== undefined && cap.data !== null && cap.data !== '')
                     data = cap.data;
 
+                let nomeExibicao = cap.nome;
+                if (cap.exibicao !== undefined && cap.exibicao !== null && cap.exibicao !== '')
+                    nomeExibicao = cap.exibicao;
+
                 tbody.innerHTML += `
                     <tr>
-                        <td>${cap.nome}</td>
+                        <td>${nomeExibicao}</td>
                         <td>${data}</td>
                         <td><a class="btn-cap" href="${BASE_PATH}Manga/${mangaId}/Cap/${cap.nome}" data-link="spa">Ler</a></td>
                     </tr>
