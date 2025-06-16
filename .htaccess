@@ -12,7 +12,7 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^ - [R=404,L]
 
 # SPA fallback: tudo que não for arquivo/diretório real vai para index.html
-RewriteRule ^ index.html [L]
+RewriteRule ^ Site-Manga/index.html [L]
 
 Options -Indexes
 
