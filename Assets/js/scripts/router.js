@@ -193,10 +193,6 @@ class Router {
     const partes = path.split('/').filter(Boolean);
     const { mangaId, capId } = LinkVerifier.extrairMangaCap(path);
 
-    // Se for arquivo estático, não navega SPA
-    if (window.location.pathname.includes('.'))
-      return;
-
     // Mangá e capítulo
     if (mangaId) 
       {

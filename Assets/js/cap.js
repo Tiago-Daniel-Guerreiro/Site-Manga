@@ -1,4 +1,4 @@
-import { redirecionarPara404, verificarManga_Utils, verificarCap_Utils } from './scripts/mangautils.js';
+import { redirecionarPara404, verificarManga_Utils, verificarCap_Utils, obterCapAnteriorProximo, ObterCapsPeloId } from './scripts/mangautils.js';
 import { BASE_PATH } from './scripts/config.js';
 
 export function init(mangaId, capId) 
@@ -51,10 +51,29 @@ export function init(mangaId, capId)
             infoManga = await resposta.json();
             const tituloEl = document.getElementById('titulo');
 
-            if (tituloEl !== null)
-                tituloEl.textContent = infoManga.Titulo + ' - Cap ' + capId;
+            // Buscar nome de exibição do capítulo
+            let nomeCap = capId;
+            const caps = await ObterCapsPeloId(mangaId);
+            if (Array.isArray(caps))
+            {
+                for (let i = 0; i < caps.length; i++)
+                {
+                    if (String(caps[i].nome) === String(capId))
+                    {
+                        if (caps[i].exibicao !== undefined && caps[i].exibicao !== null && caps[i].exibicao !== '')
+                            nomeCap = 'Capítulo ' + caps[i].exibicao;
+                        else
+                            nomeCap = 'Cap ' + caps[i].nome;
 
-            document.title = infoManga.Titulo + ' - Capítulo ' + capId;
+                        break;
+                    }
+                }
+            }
+
+            if (tituloEl !== null)
+                tituloEl.textContent = infoManga.Titulo + ' - ' + nomeCap;
+
+            document.title = infoManga.Titulo + ' - Cap ' + nomeCap;
 
             if (infoManga.Capitulos !== null && Array.isArray(infoManga.Capitulos) && infoManga.Capitulos.length > 0)
                 maxCapitulos = infoManga.Capitulos.length;
@@ -68,25 +87,20 @@ export function init(mangaId, capId)
         }
     }
 
-    function criarNavegacao(idDiv, existeAnterior, existeProximo) 
+    function criarNavegacao(idDiv, anterior, proximo) 
     {
         const nav = document.getElementById(idDiv);
-
-        if (nav === null)
-            return;
-
+        if (nav === null) return;
         nav.className = 'nav';
         const textos = window.textosCap;
-
         let btnAnterior = '<a class="nav-btn disabled" tabindex="-1">' + textos.anterior + '</a>';
         let btnProximo = '<a class="nav-btn disabled" tabindex="-1">' + textos.proximo + '</a>';
 
-        if (existeAnterior === true)
-            btnAnterior = `<a class="nav-btn" href="${BASE_PATH}Manga/${mangaId}/Cap/${parseInt(capId, 10) - 1}" data-link="spa">${textos.anterior}</a>`;
-
-        if (existeProximo === true)
-            btnProximo = `<a class="nav-btn" href="${BASE_PATH}Manga/${mangaId}/Cap/${parseInt(capId, 10) + 1}" data-link="spa">${textos.proximo}</a>`;
-
+        if (anterior) 
+            btnAnterior = `<a class="nav-btn" href="${BASE_PATH}Manga/${mangaId}/Cap/${anterior}" data-link="spa">${textos.anterior}</a>`;
+        if (proximo) 
+            btnProximo = `<a class="nav-btn" href="${BASE_PATH}Manga/${mangaId}/Cap/${proximo}" data-link="spa">${textos.proximo}</a>`;
+        
         const btnManga = `<a class="nav-btn center" href="${BASE_PATH}Manga/${mangaId}" data-link="spa">${textos.voltar}</a>`;
         nav.innerHTML = btnAnterior + btnManga + btnProximo;
     }
@@ -146,13 +160,19 @@ export function init(mangaId, capId)
         }
     }
 
-    async function carregarBotoes() 
+    async function carregarBotoes(superior)
     {
-        const existeAnterior = await verificarCap_Utils(mangaId, Number(capId) - 1);
-        const existeProximo = await verificarCap_Utils(mangaId, Number(capId) + 1);
+        let idDiv = '';
 
-        criarNavegacao('nav-top', existeAnterior, existeProximo);
-        criarNavegacao('nav-bottom', existeAnterior, existeProximo);
+        if (superior === true)
+            idDiv = 'nav-top';
+        else
+            idDiv = 'nav-bottom';
+
+        const anterior = await obterCapAnteriorProximo(mangaId, capId, false);
+        const proximo = await obterCapAnteriorProximo(mangaId, capId, true);
+
+        criarNavegacao(idDiv, anterior, proximo);
     }
 
     (async function() 
@@ -167,7 +187,8 @@ export function init(mangaId, capId)
         }
         
         await carregarTitulo();
-        await carregarBotoes();
+        await carregarBotoes(true);
         await carregarPaginas();
+        await carregarBotoes(false);
     })();
 }
