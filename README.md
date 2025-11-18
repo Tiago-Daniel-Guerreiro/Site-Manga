@@ -8,14 +8,14 @@ Este foi o meu primeiro projeto de desenvolvimento web, criado como um exercíci
 
 > **Aviso:** Todas as imagens de manga incluindo as capas foram intencionalmente removidas para respeitar os direitos autorais. O foco do projeto está no código e na arquitetura.
 
-**Visite:** [**https://tiago-daniel-guerreiro.github.io**](https://tiago-daniel-guerreiro.github.io/Site-Manga/)
+**Visite:** [**https://tiago-daniel-guerreiro.github.io/Site-Manga**](https://tiago-daniel-guerreiro.github.io/Site-Manga/)
 
 ## 🚀 Tecnologias Utilizadas
 - **HTML:** Para a estrutura semântica do conteúdo.
 - **CSS:** Para a estilização e o layout responsivo das diferentes secções.
 - **JavaScript (Vanilla JS):** O coração da aplicação, responsável por toda a lógica da SPA.
 
-A decisão de não usar frameworks (como React ou Vue) foi intencional, com o objetivo de compreender em profundidade como estas ferramentas funcionam.
+A decisão de não usar frameworks foi intencional, com o objetivo de compreender em profundidade como estas ferramentas funcionam.
 
 ## 🎯 Objetivo Principal
 O projeto nasceu de uma pergunta simples: **"Como construir uma experiência de navegação fluida, sem recarregar a página a cada clique, usando apenas as tecnologias base da web?"**. O objetivo era, portanto, aprender a manipular o DOM, gerir eventos e simular a navegação entre páginas de forma eficiente.
