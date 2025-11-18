@@ -1,11 +1,14 @@
 # Site-Manga (Primeiro Projeto Web)
 ![Technologies](https://img.shields.io/badge/Tech-HTML%20%7C%20CSS%20%7C%20JS-blue.svg)
+![Deployment](https://img.shields.io/badge/Hosted%20On-GitHub%20Pages-orange.svg)
 ![Architecture](https://img.shields.io/badge/Arch-SPA%20(from%20scratch)-purple.svg)
 ![Status](https://img.shields.io/badge/Status-Projeto%20Escolar-brightgreen)
 
 Este foi o meu primeiro projeto de desenvolvimento web, criado como um exercício prático para dominar os fundamentos de **HTML, CSS e JavaScript**. O principal desafio técnico foi construir uma **Single Page Application (SPA)** a partir do zero, sem o auxílio de qualquer framework.
 
 > **Aviso:** Todas as imagens de manga incluindo as capas foram intencionalmente removidas para respeitar os direitos autorais. O foco do projeto está no código e na arquitetura.
+
+**Visite:** [**https://tiago-daniel-guerreiro.github.io**](https://tiago-daniel-guerreiro.github.io/Site-Manga/)
 
 ## 🚀 Tecnologias Utilizadas
 - **HTML:** Para a estrutura semântica do conteúdo.
